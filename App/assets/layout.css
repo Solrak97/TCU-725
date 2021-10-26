@@ -3,7 +3,24 @@ Celeste UCR
 155, 194, 230
 */
 
+
+/* 
+Celeste II UCR
+221, 235, 247
+*/
+
+
+
 .header {
+    font-family: Verdana, Geneva, Tahoma, sans-serif; 
+    padding-left: 3%;
+    padding-bottom: 1%;
+    padding-top: 1%; 
     background-color: rgb(155,194,230);
     color: #ffffff;
+      
+}
+
+.navbar {
+    color: rgb(221, 235, 247);
 }
