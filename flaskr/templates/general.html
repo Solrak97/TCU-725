@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}General{% endblock %}
+{% block header %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='general.css') }}">
+{% endblock %}
+
+{% block body%}
+<div class = "content-block">
+    <div>
+        MAPA
+    </div>
+    <div id="figEstudiantes" class="chart"></div>
+    <div>
+        TABLA
+    </div>
+</div>
+{% endblock%}
+
+{% block scripts %}
+<script type='text/javascript'>
+    var graphs = {{figEstudiantes | safe}};
+    Plotly.plot('figEstudiantes',graphs,{});
+  </script>
+{% endblock %}

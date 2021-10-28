@@ -1,0 +1,8 @@
+.content-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    //Editar el tamaño a ver que
+    grid-template-rows: 450px;
+    grid-column-gap: 20px;
+    padding: 1%;
+}
