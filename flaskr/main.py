@@ -3,6 +3,8 @@ import json
 import figuras
 import plotly
 
+from Models import carga_academica as CA
+
 app = Flask(__name__)
 
 @app.route('/', methods = ['GET'])
@@ -25,6 +27,8 @@ def colegios():
 
 @app.route('/carga_academica', methods = ['GET'])
 def carga_academica():
-    return render_template('carga_academica.html')
+    year = request.args.get('year')
+    carga = CA.Carga_Academica(year)
+    return render_template('carga_academica.html', CargaAcademica=carga)
 
 app.run()

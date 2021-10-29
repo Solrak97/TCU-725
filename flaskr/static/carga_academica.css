@@ -1,0 +1,37 @@
+.base {
+    display: grid;
+    grid-template-columns: 0.2fr 3fr;
+}
+
+.superior {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 300px;
+    grid-column-gap: 20px;
+    padding: 1%;
+}
+
+.inferior {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 300px;
+    grid-column-gap: 20px;
+    padding: 1%;
+}
+
+.vertical-nav {
+    background-color: rgb(221, 235, 247);
+}
+
+.vertical-item {
+    display: block;
+    color: black;
+    text-align: center;
+    padding-top: 15%;
+    padding-bottom: 15%;
+}
+
+.vertical-item:hover {
+    color: white;
+    background-color: rgb(118, 118, 172);
+}

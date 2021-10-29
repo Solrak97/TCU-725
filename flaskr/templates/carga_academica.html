@@ -2,11 +2,58 @@
 {% block title %}Carga Academica{% endblock %}
 
 {% block header %}
-
+<link rel="stylesheet" href="{{ url_for('static', filename='carga_academica.css') }}">
 {% endblock %}
 
 {% block body%}
-<h1>
-    En construccion
-</h1>
+<div class="base">
+    <!--Navbar lateral-->
+    <div class="vertical-nav">
+        <div>
+            <a href="\carga_academica" class="vertical-item">Total</a>
+        </div>
+        {% for year in CargaAcademica.anos %}
+        <div>
+            <a href="\carga_academica?year={{year}}" class="vertical-item">{{year}}</a>
+        </div>
+        {% endfor %}
+    </div>
+    <!--Contenido actualizable-->
+    {% if CargaAcademica.year is none %}
+    <div class="contenedor">
+        <div class="superior">
+            <div>a</div>
+            <div>b</div>
+            <div id="proyectosAno" class="chart"></div>
+        </div>
+        <div class="inferior">
+            <div id="proyectoGenero" class="chart"></div>
+            <div id="horasCiclo" class="chart"></div>
+        </div>
+    </div>
+    {% else %}
+    <div class="contenedor">
+        Implementar cosa divertida con anos
+    </div>
+    {% endif %}
+
+</div>
 {% endblock%}
+
+
+{% block scripts %}
+<script type='text/javascript'>
+    var graphs = {{ CargaAcademica.fig_proyecto_genero | safe}};
+    Plotly.plot('proyectoGenero', graphs, {});
+</script>
+
+<script type='text/javascript'>
+    var graphs = {{ CargaAcademica.horas_ciclo | safe}};
+    Plotly.plot('horasCiclo', graphs, {});
+</script>
+
+<script type='text/javascript'>
+    var graphs = {{ CargaAcademica.proyectos_ano | safe}};
+    Plotly.plot('proyectosAno', graphs, {});
+</script>
+{% endblock %}
