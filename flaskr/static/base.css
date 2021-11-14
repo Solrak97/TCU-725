@@ -24,11 +24,11 @@
 }
 
 .navigation div a:hover {
-    background-color: rgb(118, 118, 172);
+    background-color: rgb(148, 196, 216);
     color: white;
 }
 
-.navigation div a:active {
-    background-color: rgb(118, 118, 172);
-    color: white;
+a.active-nav {
+    background-color: rgb(118, 118, 172) !important; 
+    color: white !important;
 }

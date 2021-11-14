@@ -41,19 +41,19 @@
 <!-- NavBar-->
 <div class = "navigation">
   <div>
-    <a href="/">General</a>
+    <a href="/" {% if state == "general" %} class = "active-nav" {% endif%}>General</a>
   </div>
   <div>
-    <a href="/estudiantes">Estudiantes</a>
+    <a href="/estudiantes" {% if state == "estudiantes" %} class = "active-nav" {% endif%}>Estudiantes</a>
   </div>
   <div>
-    <a href="/tutores">Tutores</a>
+    <a href="/tutores" {% if state == "tutores" %} class = "active-nav" {% endif%}>Tutores</a>
   </div>
   <div>
-    <a href="/colegios">Colegios</a>
+    <a href="/colegios" {% if state == "colegios" %} class = "active-nav" {% endif%}>Colegios</a>
   </div>
   <div>
-    <a href="/carga_academica">Carga Academica</a>
+    <a href="/carga_academica" {% if state == "cargas" %} class = "active-nav" {% endif%}>Carga Academica</a>
   </div>
 </div>
 

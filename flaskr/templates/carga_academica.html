@@ -20,20 +20,18 @@
     </div>
     <!--Contenido actualizable-->
     {% if CargaAcademica.year is none %}
-    <div class="contenedor">
-        <div class="superior">
-            <div>a</div>
-            <div>b</div>
-            <div id="proyectosAno" class="chart"></div>
-        </div>
-        <div class="inferior">
-            <div id="proyectoGenero" class="chart"></div>
-            <div id="horasCiclo" class="chart"></div>
-        </div>
-    </div>
+        {% include 'carga_academica_base.html'%}
+        {% block base %}
+        {% endblock %}
+        {% block base_scripts %}
+        {% endblock %}
     {% else %}
     <div class="contenedor">
-        Implementar cosa divertida con anos
+        {% include 'carga_academica_anual.html' %}
+        {% block anual %}
+        {% block anual_scripts %}
+        {% endblock %}
+        {% endblock %}
     </div>
     {% endif %}
 
@@ -44,16 +42,21 @@
 {% block scripts %}
 <script type='text/javascript'>
     var graphs = {{ CargaAcademica.fig_proyecto_genero | safe}};
-    Plotly.plot('proyectoGenero', graphs, {});
+    Plotly.plot('proyecto_genero', graphs, {});
 </script>
 
 <script type='text/javascript'>
     var graphs = {{ CargaAcademica.horas_ciclo | safe}};
-    Plotly.plot('horasCiclo', graphs, {});
+    Plotly.plot('horas_ciclo', graphs, {});
 </script>
 
 <script type='text/javascript'>
     var graphs = {{ CargaAcademica.proyectos_ano | safe}};
-    Plotly.plot('proyectosAno', graphs, {});
+    Plotly.plot('proyectos_ano', graphs, {});
+</script>
+
+<script type='text/javascript'>
+    var graphs = {{ CargaAcademica.fig_estado_proyecto | safe}};
+    Plotly.plot('estado_proyecto', graphs, {});
 </script>
 {% endblock %}

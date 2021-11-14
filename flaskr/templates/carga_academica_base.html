@@ -1,0 +1,85 @@
+{% block base %}
+<div class="contenedor">
+    <div class="superior">
+        <div class="box-container">
+            <h3 style="text-align: center; margin-top: 2%; margin-bottom: 5%;">Estado de los proyectos activos</h3>
+            <div class="tabla-estados">
+                <div class="row1">Cantidad de proyectos activos</div>
+                <div class="row1">{{ (CargaAcademica.tabla_estado_proyecto["Cantidad de proyectos activos"][0]) | int }}%</div>
+                <div></div>
+                <div class="row2">Cantidad de proyectos con vigencia</div>
+                <div class="row2">{{ (CargaAcademica.tabla_estado_proyecto["Cantidad de proyectos con vigencia"][0]) | int }}</div>
+                <div class="row2">{{ CargaAcademica.tabla_estado_proyecto["Cantidad de proyectos con vigencia"][1] }}%</div>
+                <div class="row3">Cantidad de proyectos con carga aprobada para 2022</div>
+                <div class="row3">{{ (CargaAcademica.tabla_estado_proyecto["Cantidad de proyectos con carga aprovada para el 2022"][0]) | int }}</div>
+                <div class="row3">{{ CargaAcademica.tabla_estado_proyecto["Cantidad de proyectos con carga aprovada para el 2022"][1] }}%</div>
+                <div class="row4">Cantidad de proyectos con sobrecarga</div>
+                <div class="row4">{{ (CargaAcademica.tabla_estado_proyecto["Cantidad de proyectos con sobrecarga"][0])| int }}</div>
+                <div class="row4">{{ CargaAcademica.tabla_estado_proyecto["Cantidad de proyectos con sobrecarga"][1] }}%</div>
+            </div>
+        </div>
+        <div class="box-container">
+            <div id="estado_proyecto" class="chart"></div>
+        </div>
+        <div class="box-container">
+            <h3  style="text-align: center; margin-top: 2%; margin-bottom: 5%;">Tipo de proyecto</h3>
+            <div class="tabla-categoría">
+                <div class="row1">{{ CargaAcademica.tabla_tipo["Tipo"][0] }}</div>
+                <div class="row1">{{ CargaAcademica.tabla_tipo["Cantidad"][0] }}</div>
+                <div class="row1">{{ CargaAcademica.tabla_tipo["Porcentaje"][0] }}%</div>
+                <div class="row1">{{ CargaAcademica.tabla_tipo["Tipo"][1] }}</div>
+                <div class="row1">{{ CargaAcademica.tabla_tipo["Cantidad"][1] }}</div>
+                <div class="row1">{{ CargaAcademica.tabla_tipo["Porcentaje"][1] }}%</div>
+            </div>
+            <div class="tabla-promedios">
+                <div class="row5">{{ CargaAcademica.tabla_promedio["Categoría"][0]}}</div>
+                <div class="row5">{{ CargaAcademica.tabla_promedio["Promedio"][0]}}</div>
+                <div class="row5">{{ CargaAcademica.tabla_promedio["Categoría"][1]}}</div>
+                <div class="row5">{{ CargaAcademica.tabla_promedio["Promedio"][1]}}</div>
+            </div>
+            <div class="tabla-horas-sup">
+                <h4 style="text-align: center; margin-top: 2%;">Cantidad de horas promedio por ciclo</h4>
+                <div class="tabla-horas">
+                    <div class="row1">{{ CargaAcademica.tabla_promedio["Categoría"][2]}}</div>
+                    <div class="row1">{{ CargaAcademica.tabla_promedio["Promedio"][2]}}</div>
+                    <div class="row1">{{ CargaAcademica.tabla_promedio["Categoría"][3]}}</div>
+                    <div class="row1">{{ CargaAcademica.tabla_promedio["Promedio"][3]}}</div>
+                    <div class="row1">{{ CargaAcademica.tabla_promedio["Categoría"][4]}}</div>
+                    <div class="row1">{{ CargaAcademica.tabla_promedio["Promedio"][4]}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="box-container">
+            <div id="proyectos_ano" class="chart"></div>
+        </div>
+        <div class="box-container">
+            <div id="proyecto_genero" class="chart"></div>
+        </div>
+        <div class="box-container">
+            <div id="horas_ciclo" class="chart"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block base_scripts %}
+<script type='text/javascript'>
+    var graphs = {{ CargaAcademica.fig_proyecto_genero | safe}};
+    Plotly.plot('proyecto_genero', graphs, {});
+</script>
+
+<script type='text/javascript'>
+    var graphs = {{ CargaAcademica.horas_ciclo | safe}};
+    Plotly.plot('horas_ciclo', graphs, {});
+</script>
+
+<script type='text/javascript'>
+    var graphs = {{ CargaAcademica.proyectos_ano | safe}};
+    Plotly.plot('proyectos_ano', graphs, {});
+</script>
+
+<script type='text/javascript'>
+    var graphs = {{ CargaAcademica.fig_estado_proyecto | safe}};
+    Plotly.plot('estado_proyecto', graphs, {});
+</script>
+{% endblock %}
