@@ -1,1 +1,1 @@
-worker: python flaskr/main.py
+worker: python flaskr\main.py
