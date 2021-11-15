@@ -1,1 +1,1 @@
-web: gunicorn flaskr\main:app
+worker: python flaskr/main.py
