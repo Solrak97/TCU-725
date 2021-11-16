@@ -32,4 +32,5 @@ def carga_academica():
     carga = CA.Carga_Academica(year)
     return render_template('carga_academica.html', CargaAcademica=carga, state = "cargas")
 
-app.run()
+if __name__ == '__main__':
+    app.run()
