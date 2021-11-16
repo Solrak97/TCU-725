@@ -21,7 +21,7 @@ def beforeRequest():
 def general():
     fig_estudiantes = figuras.estudiantes_institucion()
     figJSON = json.dumps(fig_estudiantes, cls=plotly.utils.PlotlyJSONEncoder)
-    return render_template('general.html', figEstudiantes=figJSON, state = "general")
+    return render_template('general.html', state = "general")
 
 @app.route('/estudiantes', methods = ['GET'])
 def estudiantes():
