@@ -2,10 +2,20 @@ from flask import Flask, render_template, request
 import json
 import figuras
 import plotly
+import os
+
+from flask_sslify import SSLify
+if 'DYNO' in os.environ: # only trigger SSLify if the app is running on Heroku
+    sslify = SSLify(app)
 
 from Models import carga_academica as CA
 
 app = Flask(__name__)
+
+@app.before_request
+def beforeRequest():
+    if not request.url.startswith('https'):
+        return redirect(request.url.replace('http', 'https', 1))
 
 @app.route('/', methods = ['GET'])
 def general():
