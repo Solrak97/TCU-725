@@ -5,12 +5,12 @@ import plotly
 import os
 
 from flask_sslify import SSLify
-if 'DYNO' in os.environ: # only trigger SSLify if the app is running on Heroku
-    app = SSLify(app)
-
 from Models import carga_academica as CA
 
 app = Flask(__name__)
+
+if 'DYNO' in os.environ: # only trigger SSLify if the app is running on Heroku
+    app = SSLify(app)
 
 @app.before_request
 def beforeRequest():
