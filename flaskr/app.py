@@ -10,7 +10,7 @@ from Models import carga_academica as CA
 app = Flask(__name__)
 
 if 'DYNO' in os.environ: # only trigger SSLify if the app is running on Heroku
-    app = SSLify(app)
+    sslify = SSLify(app)
 
 @app.before_request
 def beforeRequest():
