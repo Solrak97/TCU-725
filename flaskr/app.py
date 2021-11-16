@@ -6,7 +6,7 @@ import os
 
 from flask_sslify import SSLify
 if 'DYNO' in os.environ: # only trigger SSLify if the app is running on Heroku
-    sslify = SSLify(app)
+    app = SSLify(app)
 
 from Models import carga_academica as CA
 
