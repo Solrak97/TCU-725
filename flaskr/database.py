@@ -7,16 +7,18 @@ config = dotenv_values(".env")
 
 class Database():
     def __init__(self) -> None:
-    #    self.database = config['DB_NAME']
-    #    self.server = config['DB_SERVER']
-    #    self.user = config['DB_USERID']
-    #    self.password = config['DB_PASSWORD']
-    #    self.port = config['DB_PORT']
-        self.database = os.environ.get('DB_NAME')
-        self.server = os.environ.get('DB_SERVER')
-        self.user = os.environ.get('DB_USERID')
-        self.password = os.environ.get('DB_PASSWORD')
-        self.port = os.environ.get('DB_PORT')
+        if 'DYNO' in os.environ:
+            self.database = config['DB_NAME']
+            self.server = config['DB_SERVER']
+            self.user = config['DB_USERID']
+            self.password = config['DB_PASSWORD']
+            self.port = config['DB_PORT']
+        else:
+            self.database = os.environ.get('DB_NAME')
+            self.server = os.environ.get('DB_SERVER')
+            self.user = os.environ.get('DB_USERID')
+            self.password = os.environ.get('DB_PASSWORD')
+            self.port = os.environ.get('DB_PORT')
         self.conn = []
         pass
 
