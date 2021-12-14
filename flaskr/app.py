@@ -5,6 +5,9 @@ import plotly
 import os
 
 from Models import carga_academica as CA
+from Models.Estado import Estado
+
+estado = Estado()
 
 app = Flask(__name__)
 
@@ -12,19 +15,19 @@ app = Flask(__name__)
 def general():
     fig_estudiantes = figuras.estudiantes_institucion()
     figJSON = json.dumps(fig_estudiantes, cls=plotly.utils.PlotlyJSONEncoder)
-    return render_template('general.html', state = "general")
+    return render_template('general.html', state = "general", Estado = estado)
 
 @app.route('/estudiantes', methods = ['GET'])
 def estudiantes():
-    return render_template('estudiantes.html', state = "estudiantes")
+    return render_template('estudiantes.html', state = "estudiantes", Estado = estado)
 
 @app.route('/tutores', methods = ['GET'])
 def tutores():
-    return render_template('tutores.html', state = "tutores")
+    return render_template('tutores.html', state = "tutores", Estado = estado)
 
 @app.route('/colegios', methods = ['GET'])
 def colegios():
-    return render_template('colegios.html', state = "colegios")
+    return render_template('colegios.html', state = "colegios", Estado = estado)
 
 
 

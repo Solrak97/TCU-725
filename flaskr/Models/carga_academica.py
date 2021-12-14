@@ -1,6 +1,6 @@
 from flask.views import MethodView
 from flask import render_template
-
+from .Estado import Estado
 
 import plotly.express as px
 import plotly
@@ -45,11 +45,11 @@ margin = {
     'b': 20
 }
 
-class Estado_General:
+class Estado_General(Estado):
     def __init__(self, year=None):
+        super(Estado_General, self).__init__()
         self.general = True
         data = db.query_data("SELECT * FROM prueba.Cargas_Academicas")
-        self.anos = get_years(data)
         self.fig_proyecto_genero = proyecto_genero(data);
         self.horas_ciclo = fig_horas_ciclo(data)
         self.proyectos_ano = proyectos_ano(data)
@@ -61,13 +61,13 @@ class Estado_General:
 
 
 
-class Estado_Anual:
+class Estado_Anual(Estado):
     def __init__(self, year):
+        super(Estado_Anual, self).__init__()
         self.year = year
         self.general = False
         data = db.query_data(f'''SELECT * FROM prueba.Cargas_Academicas
         WHERE Year = {year}''')
-        self.anos = get_years(data)
         self.tabla_proyectos = tabla_proyectos(data)
         self.tabla_promedio = tabla_promedio(data)
         self.tabla_tipo = tabla_tipo(data)
@@ -188,15 +188,3 @@ def tabla_estado(data):
 #Tabla de proyectos
 def tabla_proyectos(data):
     return data[["Investigador", "Codigo", "Proyecto", "Vicerrect"]]
-
-
-#Seleccion de años desde la base de datos
-def get_years(data):
-    anos = db.query_data('''
-    SELECT DISTINCT Year 
-    FROM prueba.Cargas_Academicas 
-    WHERE Year IS NOT NULL
-    ORDER BY Year;
-    ''')
-    
-    return anos['Year']

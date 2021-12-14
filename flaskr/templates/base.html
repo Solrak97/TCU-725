@@ -30,10 +30,11 @@
   </div>
   
   <div>
-    <h3>
+    <h3><u>TCU-725</u></h3>
+    <h5 style="color: rgb(58, 58, 58);">
       Éxito en MATEM: </br>
       Potenciando nuestros futuros estudiantes
-    </h3>
+    </h5>
   </div>
 </div>
 
@@ -51,8 +52,14 @@
   <div>
     <a href="/colegios" {% if state == "colegios" %} class = "active-nav" {% endif%}>Colegios</a>
   </div>
-  <div>
+  <div class="dropdown">
     <a href="/carga_academica" {% if state == "cargas" %} class = "active-nav" {% endif%}>Carga Academica</a>
+    <!--Navbar lateral-->
+      <div  class = dropdown-content>
+      {% for year in Estado.anos %}
+          <a href="\carga_academica\{{year}}" class="vertical-item">{{year}}</a>
+      {% endfor %}
+    </div>
   </div>
 </div>
 

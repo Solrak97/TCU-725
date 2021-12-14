@@ -6,18 +6,6 @@
 {% endblock %}
 
 {% block body%}
-<div class="base">
-    <!--Navbar lateral-->
-    <div class="vertical-nav">
-        <div>
-            <a href="\carga_academica" class="vertical-item">Total</a>
-        </div>
-        {% for year in Estado.anos %}
-        <div>
-            <a href="\carga_academica\{{year}}" class="vertical-item">{{year}}</a>
-        </div>
-        {% endfor %}
-    </div>
     <!--Contenido actualizable-->
     {% if Estado.general %}
         {% include 'carga_academica_base.html'%}
@@ -26,16 +14,12 @@
         {% block base_scripts %}
         {% endblock %}
     {% else %}
-    <div class="contenedor">
         {% include 'carga_academica_anual.html' %}
         {% block anual %}
         {% block anual_scripts %}
         {% endblock %}
         {% endblock %}
-    </div>
     {% endif %}
-
-</div>
 {% endblock%}
 
 
