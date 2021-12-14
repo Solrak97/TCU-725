@@ -12,14 +12,14 @@
         <div>
             <a href="\carga_academica" class="vertical-item">Total</a>
         </div>
-        {% for year in CargaAcademica.anos %}
+        {% for year in Estado.anos %}
         <div>
-            <a href="\carga_academica?year={{year}}" class="vertical-item">{{year}}</a>
+            <a href="\carga_academica\{{year}}" class="vertical-item">{{year}}</a>
         </div>
         {% endfor %}
     </div>
     <!--Contenido actualizable-->
-    {% if CargaAcademica.year is none %}
+    {% if Estado.general %}
         {% include 'carga_academica_base.html'%}
         {% block base %}
         {% endblock %}
@@ -41,22 +41,22 @@
 
 {% block scripts %}
 <script type='text/javascript'>
-    var graphs = {{ CargaAcademica.fig_proyecto_genero | safe}};
+    var graphs = {{ Estado.fig_proyecto_genero | safe}};
     Plotly.plot('proyecto_genero', graphs, {});
 </script>
 
 <script type='text/javascript'>
-    var graphs = {{ CargaAcademica.horas_ciclo | safe}};
+    var graphs = {{ Estado.horas_ciclo | safe}};
     Plotly.plot('horas_ciclo', graphs, {});
 </script>
 
 <script type='text/javascript'>
-    var graphs = {{ CargaAcademica.proyectos_ano | safe}};
+    var graphs = {{ Estado.proyectos_ano | safe}};
     Plotly.plot('proyectos_ano', graphs, {});
 </script>
 
 <script type='text/javascript'>
-    var graphs = {{ CargaAcademica.fig_estado_proyecto | safe}};
+    var graphs = {{ Estado.fig_estado_proyecto | safe}};
     Plotly.plot('estado_proyecto', graphs, {});
 </script>
 {% endblock %}

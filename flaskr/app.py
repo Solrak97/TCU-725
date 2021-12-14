@@ -26,11 +26,22 @@ def tutores():
 def colegios():
     return render_template('colegios.html', state = "colegios")
 
-@app.route('/carga_academica', methods = ['GET'])
-def carga_academica():
-    year = request.args.get('year')
-    carga = CA.Carga_Academica(year)
-    return render_template('carga_academica.html', CargaAcademica=carga, state = "cargas")
+
+
+
+#   Rutas para carga academica
+carga_view = CA.Carga_Academica.as_view("Carga_Academica")
+
+app.add_url_rule('/carga_academica', defaults={'year': None},
+                 view_func=carga_view, methods=['GET',])
+
+app.add_url_rule('/carga_academica/<int:year>', view_func=carga_view, methods=['GET',])
+
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run()
