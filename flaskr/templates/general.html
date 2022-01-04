@@ -8,22 +8,87 @@
 {% block body%}
 <div class="content-block">
     <div>
-        MAPA
+        <h5  style="text-align: center; margin-top: 2%; margin-bottom: 5%;" >Estudiantes por institución</h5>
+        <table class="table table-striped table-bordered proyectos_inscritos">
+            <thead>
+                <tr>
+                    <th>
+                        Institución
+                    </th>
+                    <th>
+                        Estudiantes totales
+                    </th>
+                    <th>
+                        Estudiantes esperados
+                    </th>
+                </tr>
+            </thead>
+            {% for key, value in Estado.tabla_estudiantes.iterrows() %}
+            <tr>
+                <th>
+                    {{ value['Institucion'] }} 
+                </th>
+                <th>
+                    {{ value['Total Estudiantes'] }}
+                </th>
+                <th>
+                    {{ value['Estudiantes Esperados'] }}
+                </th>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
-    {% include 'construccion.html' %}
-    {% block Construccion %}
-    {% endblock %}
+    <div id="total_estudiantes" class="chart"></div>
     <div>
-        TABLA
+        <h5  style="text-align: center; margin-top: 2%; margin-bottom: 5%;" >Estadisticas de aprobación en estudiantes</h5>
+        <table class="table table-striped table-bordered proyectos_inscritos">
+            <thead>
+                <tr>
+                    <th>
+                        Criterio
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                    <th>
+                        Promedio
+                    </th>
+                </tr>
+            </thead>
+            <tr>
+                <th>Nota promedio de aprobación</th>
+                <th>#</th>
+                <th>{{ Estado.tabla_aprobacion[0]['Nota promedio de aprobacion'][0] }}%</th>
+            </tr>
+            <tr>
+                <th>Estudiantes aprobados</th> 
+                <th>{{ Estado.tabla_aprobacion[1]['Estudiantes aprobados'][0] }}</th>
+                <th>{{ Estado.tabla_aprobacion[1]['Porcentage de aprobados'][0] }}%</th>
+            </tr>
+            <tr>
+                <th>Estudiantes reprobados</th>
+                <th>{{ Estado.tabla_aprobacion[2]['Estudiantes reprobados'][0] }}</th>
+                <th>{{ Estado.tabla_aprobacion[2]['Porcentage de reprobados'][0] }}%</th>
+            </tr>
+            <tr>
+                <th>Estudiantes activos</th>
+                <th>{{ Estado.tabla_aprobacion[3]['Estudiantes activos'][0] }}</th>
+                <th>{{ Estado.tabla_aprobacion[3]['Porcentage de activos'][0] }}%</th>
+            </tr>
+            <tr>
+                <th>Retiros de estudiante</th>
+                <th>{{ Estado.tabla_aprobacion[4]['Estudiantes retiro'][0] }}</th>
+                <th>{{ Estado.tabla_aprobacion[4]['Porcentage de retiro'][0] }}%</th>
+            </tr>
+        </table>
     </div>
 </div>
 {% endblock%}
 
-<!--
+
 {% block scripts %}
 <script type='text/javascript'>
-    var graphs = {{ figEstudiantes | safe}};
-    Plotly.plot('figEstudiantes', graphs, {});
+    var graphs = {{ Estado.grafico_estudiantes | safe }};
+    Plotly.plot('total_estudiantes', graphs, {});
 </script>
 {% endblock %}
--->

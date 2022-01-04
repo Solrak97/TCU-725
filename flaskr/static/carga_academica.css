@@ -3,7 +3,7 @@
 .section2 {
     display: grid;
     grid-template-columns: 0.7fr 1fr;
-    grid-column-gap: 5px;
+    grid-column-gap: 15px;
     grid-row-gap: 5px;
     padding: 1%;
 }
@@ -47,4 +47,12 @@ table.dataTable tbody td {
 
 .proyectos_inscritos {
 background-color: rgb(252, 228, 214);
+}
+
+
+#proyectos-inscritos {
+    overflow-y: scroll;
+    max-height: 40%;
+    display: block;
+
 }

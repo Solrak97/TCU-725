@@ -5,22 +5,25 @@
     <!-- Seccion izquierda -->
     <div>
         <h5 style="text-align: center; margin-top: 2%; margin-bottom: 5%;" >Proyectos inscritos durante el año {{ Estado.year }}</h5>
-        <table class="table table-striped table-bordered proyectos_inscritos">
-            <tr style="background-color: rgb(250, 189, 153);">
-                <th>Investigador</th>
-                <th>Codigo</th>
-                <th>Proyecto</th>
-                <th>Tipo de proyecto</th>
-            </tr>
-
-            {% for key, value in Estado.tabla_proyectos.iterrows() %}
-            <tr>
-                <th>{{ value['Investigador'] }}</th>
-                <th>{{ value['Codigo'] }}</th>
-                <th>{{ value['Proyecto'] }}</th>
-                <th>{{ value['Vicerrect'] }}</th>
-            </tr>
-            {% endfor %}
+        <table id = "proyectos-inscritos" class="table table-striped table-bordered proyectos_inscritos">
+            <thead>
+                <tr style="background-color: rgb(250, 189, 153);">
+                    <th>Investigador</th>
+                    <th>Codigo</th>
+                    <th>Proyecto</th>
+                    <th>Tipo de proyecto</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, value in Estado.tabla_proyectos.iterrows() %}
+                <tr>
+                    <th>{{ value['Investigador'] }}</th>
+                    <th>{{ value['Codigo'] }}</th>
+                    <th>{{ value['Proyecto'] }}</th>
+                    <th>{{ value['Vicerrect'] }}</th>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
     <!-- Seccion Derecha -->
@@ -36,6 +39,9 @@
                             </th>
                             <th>
                                 {{ (Estado.tabla_estado_proyecto["Cantidad de proyectos activos"][0]) | int }}
+                            </th>
+                            <th>
+                                #
                             </th>
                         </tr>
                         <tr>

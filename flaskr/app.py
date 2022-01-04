@@ -5,17 +5,18 @@ import plotly
 import os
 
 from Models import carga_academica as CA
+from Models import general as GENERAL
 from Models.Estado import Estado
 
 estado = Estado()
 
 app = Flask(__name__)
 
-@app.route('/', methods = ['GET'])
-def general():
-    fig_estudiantes = figuras.estudiantes_institucion()
-    figJSON = json.dumps(fig_estudiantes, cls=plotly.utils.PlotlyJSONEncoder)
-    return render_template('general.html', state = "general", Estado = estado)
+general_view = GENERAL.General.as_view("General")
+app.add_url_rule('/', view_func=general_view, methods = ['GET'])
+
+
+
 
 @app.route('/estudiantes', methods = ['GET'])
 def estudiantes():
@@ -34,10 +35,8 @@ def colegios():
 
 #   Rutas para carga academica
 carga_view = CA.Carga_Academica.as_view("Carga_Academica")
-
 app.add_url_rule('/carga_academica', defaults={'year': None},
                  view_func=carga_view, methods=['GET',])
-
 app.add_url_rule('/carga_academica/<int:year>', view_func=carga_view, methods=['GET',])
 
 
