@@ -34,21 +34,24 @@
 
 a.active-nav {
     background-color: rgb(71, 71, 71) !important;
-    color: rgb(0,192,243) !important; 
+    color: rgb(0,192,243) !important;
 }
 
 .dropdown {
     position: relative;
     display: inline-block;
-  }
+}
 
 .dropdown-content {
     position: absolute;
     display: none;
     min-width: 100%;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
 
+.dropdown-content a {
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2) !important;
+    border-radius: 3px !important;
+}
 
 .dropdown:hover .dropdown-content {display: block;}

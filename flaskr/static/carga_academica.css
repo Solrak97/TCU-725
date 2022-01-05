@@ -26,10 +26,6 @@
 }
 
 
-.subsection3{
-
-}
-
 
 .table {
     table-layout: auto;
@@ -45,14 +41,15 @@ table.dataTable tbody td {
     vertical-align: top;
 }
 
+/*
 .proyectos_inscritos {
-background-color: rgb(252, 228, 214);
-}
 
+}
+*/
 
 #proyectos-inscritos {
     overflow-y: scroll;
-    max-height: 40%;
+    max-height: min-content;
     display: block;
-
+    height: 90%;
 }

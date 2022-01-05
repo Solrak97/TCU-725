@@ -1,14 +1,4 @@
-from flask.views import MethodView
-from flask import render_template
-from .Estado import Estado
-
-import plotly.express as px
-import plotly
-from database import Database
-import json
-import pandas as pd
-import numpy as np
-
+from .Estado import *
 
 #Entry Points para /carga_academica/
 class Carga_Academica(MethodView):
@@ -23,27 +13,6 @@ class Carga_Academica(MethodView):
             pass
     pass
 
-
-#Entry point de la base de datos
-db = Database()
-
-
-layout = {
-    #'paper_bgcolor':'rgba(0,0,0,0)',
-    #'plot_bgcolor':'rgba(0,0,0,0)',
-    'title_x' : 0.5,
-#    'x': 0.5,
-#    'y': 0.90,
-#    'xanchor': 'center',
-#    'yanchor': 'top',
-}
-
-margin = {
-    'l': 20,
-    'r': 20,
-    't': 20,
-    'b': 20
-}
 
 class Estado_General(Estado):
     def __init__(self, year=None):
@@ -61,7 +30,7 @@ class Estado_General(Estado):
 
 
 
-class Estado_Anual(Estado):
+class Estado_Anual(Estado_General):
     def __init__(self, year):
         super(Estado_Anual, self).__init__()
         self.year = year
@@ -69,12 +38,6 @@ class Estado_Anual(Estado):
         data = db.query_data(f'''SELECT * FROM prueba.Cargas_Academicas
         WHERE Year = {year}''')
         self.tabla_proyectos = tabla_proyectos(data)
-        self.tabla_promedio = tabla_promedio(data)
-        self.tabla_tipo = tabla_tipo(data)
-        self.tabla_estado_proyecto = tabla_estado(data)
-        self.fig_estado_proyecto = estado_proyecto(data)
-        self.fig_proyecto_genero = proyecto_genero(data);
-        self.horas_ciclo = fig_horas_ciclo(data)
         pass
     pass
 
@@ -85,11 +48,8 @@ def proyectos_ano(data):
     values = values.groupby(["Year"])["Year"].count()
     fig = px.bar(values, x = values, y = values.index,
         title='Cantidad de proyectos asignados por año',
-        color_discrete_sequence=px.colors.sequential.Aggrnyl, 
-        labels={
-            "y": "Cantidad de proyectos",
-            "index": "Año"
-        }, orientation='h')
+        color_discrete_sequence=px.colors.sequential.Aggrnyl,
+        orientation='h')
     fig.update_layout(layout)
     return json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
         

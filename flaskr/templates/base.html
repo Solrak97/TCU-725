@@ -46,9 +46,21 @@
   <div>
     <a href="/" {% if state == "general" %} class = "active-nav" {% endif%}>General</a>
   </div>
-  <div>
+  
+  <div class="dropdown">
+    <a href="/estudiantes" {% if state == "estudiantes" %} class = "active-nav" {% endif%}>Estudiantes</a>
+    <!--Navbar lateral-->
+      <div  class = dropdown-content>
+      {% for index, row in Estado.instituciones.iterrows() %}
+          <a href="\estudiantes\{{row[0]}}" class="vertical-item">{{row[1]}}</a>
+      {% endfor %}
+    </div>
+  </div>
+  <!--
+    <div>
     <a href="/estudiantes" {% if state == "estudiantes" %} class = "active-nav" {% endif%}>Estudiantes</a>
   </div>
+  !-->
   <div>
     <a href="/tutores" {% if state == "tutores" %} class = "active-nav" {% endif%}>Tutores</a>
   </div>
