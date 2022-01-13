@@ -37,7 +37,7 @@ def tabla_aprobacion():
         (SELECT count(*) FROM prueba.Estudiantes_Colegiales WHERE Estado = "RETIRO") AS "Estudiantes retiro",
         (SELECT count(*) * 100 / (SELECT count(*) FROM prueba.Estudiantes_Colegiales) FROM prueba.Estudiantes_Colegiales WHERE Estado = "RETIRO" ) AS "Porcentage de retiro"
     ''')
-    return tabla
+    return tabla.round(2)
     pass
 
 

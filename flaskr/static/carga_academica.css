@@ -5,7 +5,9 @@
     grid-template-columns: 0.7fr 1fr;
     grid-column-gap: 15px;
     grid-row-gap: 5px;
+    grid-auto-rows: 1fr;
     padding: 1%;
+    max-height: min-content;
 }
 
 .subsection2 {
@@ -49,7 +51,14 @@ table.dataTable tbody td {
 
 #proyectos-inscritos {
     overflow-y: scroll;
-    max-height: min-content;
+    height: 70%;
+    
     display: block;
-    height: 90%;
+}
+
+.scrollable {
+    display: block;
+    height:1100px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }

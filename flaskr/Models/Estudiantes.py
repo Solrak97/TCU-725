@@ -1,15 +1,4 @@
-from flask.views import MethodView
-from flask import render_template
-from .Estado import Estado
-
-import plotly.express as px
-import plotly
-from database import Database
-import json
-import pandas as pd
-import numpy as np
-
-db = Database()
+from .Estado import *
 
 class Estudiantes(MethodView):
      def get(self, ID_institucion):
@@ -26,9 +15,13 @@ class Estudiantes(MethodView):
 class Estado_General(Estado):
     def __init__(self):
          super(Estado_General, self).__init__()
+         data = db.query_data('''SELECT * FROM prueba.Estudiantes_Colegiales;''')
     pass
+
+
 
 class Estado_Institucion(Estado):
     def __init__(self, ID_institucion):
          super(Estado_Institucion, self).__init__()
+         data = db.query_data(f'''SELECT * FROM prueba.Estudiantes_Colegiales WHERE {ID_institucion};''')
     pass
