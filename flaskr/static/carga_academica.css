@@ -1,24 +1,3 @@
-
-
-.section2 {
-    display: grid;
-    grid-template-columns: 0.7fr 1fr;
-    grid-column-gap: 15px;
-    grid-row-gap: 5px;
-    grid-auto-rows: 1fr;
-    padding: 1%;
-    max-height: min-content;
-}
-
-.subsection2 {
-    vertical-align: center;
-    width: 100%;
-    min-height: 300px;
-    max-height: 300px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
 .section3 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -27,7 +6,12 @@
     padding: 1%;
 }
 
-
+.section3 > div {
+    border-left: rgba(0, 0, 0, 0.082);
+    border-right: rgba(0, 0, 0, 0.082);
+    border-left-style: dashed;
+    border-right-style: dashed;
+}
 
 .table {
     table-layout: auto;
@@ -43,22 +27,16 @@ table.dataTable tbody td {
     vertical-align: top;
 }
 
-/*
-.proyectos_inscritos {
 
-}
-*/
-
-#proyectos-inscritos {
-    overflow-y: scroll;
-    height: 70%;
-    
-    display: block;
-}
-
-.scrollable {
-    display: block;
-    height:1100px;
-    overflow-y: auto;
-    overflow-x: hidden;
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+bottom: .5em;
 }

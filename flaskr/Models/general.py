@@ -1,4 +1,4 @@
-from .Estado import *
+from .estado import *
 
 class General(MethodView):
     def get(self):

@@ -1,142 +1,27 @@
-{% block base %}
-<div class="section3">
-    <div>
-        <h5 style="text-align: center; margin-top: 2%; margin-bottom: 5%;">Estado de los proyectos</h5>
-        <table class="table table-striped table-bordered">
-            <tr>
-                <th>
-                    Cantidad de proyectos activos
-                </th>
-                <th>
-                    {{ (Estado.tabla_estado_proyecto["Cantidad de proyectos activos"][0]) | int }}
-                </th>
-                <th>
-                    #
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    Cantidad de proyectos con vigencia
-                </th>
-                <th>
-                    {{ (Estado.tabla_estado_proyecto["Cantidad de proyectos con vigencia"][0]) | int }}
-                </th>
-                <th>
-                    {{ Estado.tabla_estado_proyecto["Cantidad de proyectos con vigencia"][1] }}%
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    Cantidad de proyectos con carga aprobada para 2022
-                </th>
-                <th>
-                    {{ (Estado.tabla_estado_proyecto["Cantidad de proyectos con carga aprovada para el 2022"][0]) | int
-                    }}
-                </th>
-                <th>
-                    {{ Estado.tabla_estado_proyecto["Cantidad de proyectos con carga aprovada para el 2022"][1] }}%
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    Cantidad de proyectos con sobrecarga
-                </th>
-                <th>
-                    {{ (Estado.tabla_estado_proyecto["Cantidad de proyectos con sobrecarga"][0])| int }}
-                </th>
-                <th>
-                    {{ Estado.tabla_estado_proyecto["Cantidad de proyectos con sobrecarga"][1] }}%
-                </th>
-            </tr>
-        </table>
-    </div>
-    <div>
-        <h5 style="text-align: center; margin-top: 2%; margin-bottom: 5%;">Tipo de proyecto</h5>
-        <div>
-            <table class="table table-striped table-bordered">
-                <tr>
-                    <th>
-                        {{ Estado.tabla_tipo["Tipo"][0] }}
-                    </th>
-                    <th>
-                        {{ Estado.tabla_tipo["Cantidad"][0] }}
-                    </th>
-                    <th>
-                        {{ Estado.tabla_tipo["Porcentaje"][0] }}%
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        {{ Estado.tabla_tipo["Tipo"][1] }}
-                    </th>
-                    <th>
-                        {{ Estado.tabla_tipo["Cantidad"][1] }}
-                    </th>
-                    <th>
-                        {{ Estado.tabla_tipo["Porcentaje"][1] }}%
-                    </th>
-                </tr>
-            </table>
-        </div>
+{% extends 'base_layout.html' %}
+{% block title %}Carga Academica{% endblock %}
 
-        <div>
-            <table class="table table-striped table-bordered">
-                <tr>
-                    <th>
-                        {{ Estado.tabla_promedio["Categoría"][0]}}
-                    </th>
-                    <th>
-                        {{ Estado.tabla_promedio["Promedio"][0]}}
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        {{ Estado.tabla_promedio["Categoría"][1]}}
-                    </th>
-                    <th>
-                        {{ Estado.tabla_promedio["Promedio"][1]}}
-                    </th>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <div>
-        <div>
-            <h5 style="text-align: center; margin-top: 2%; margin-bottom: 5%;">Cantidad de horas promedio por ciclo</h5>
-            <table class="table table-striped table-bordered">
-                {% for key, value in Estado.tabla_promedio[2:].iterrows() %}
-                <tr>
-                    <th>
-                        {{ value["Categoría"] }}
-                    </th>
-                    <th>
-                        {{ value["Promedio"] }}
-                    </th>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </div>
-    <div>
-        <div id="estado_proyecto" class="chart"></div>
-    </div>
-    <div>
-        <div id="proyectos_ano" class="chart"></div>
-    </div>
-    <div>
-        <div id="horas_ciclo" class="chart"></div>
-    </div>
-    <div>
-        
-    </div>
-    <div>
-        <div id="proyecto_genero" class="chart"></div>
-    </div>
-</div>
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='carga_academica.css') }}">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 
 {% endblock %}
 
-{% block base_scripts %}
+{% block body%}
+    <!--Contenido actualizable-->
+    {% if Estado.general %}
+        {% include 'carga_academica_general.html'%}
+        {% block general %}
+        {% endblock %}
+    {% else %}
+        {% include 'carga_academica_anual.html' %}
+        {% block anual %}
+        {% endblock %}
+    {% endif %}
+{% endblock%}
+
+
+{% block scripts %}
 <script type='text/javascript'>
     var graphs = {{ Estado.fig_proyecto_genero | safe}};
     Plotly.plot('proyecto_genero', graphs, {});

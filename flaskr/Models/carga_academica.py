@@ -1,14 +1,14 @@
-from .Estado import *
+from .estado import *
 
 #Entry Points para /carga_academica/
 class Carga_Academica(MethodView):
     def get(self, year):
         if year is None:
-            return render_template('carga_academica.html', 
+            return render_template('carga_academica_base.html', 
                 Estado=Estado_General(), state = "cargas")
             pass
         else:
-            return render_template('carga_academica.html', 
+            return render_template('carga_academica_base.html', 
                 Estado=Estado_Anual(year), state = "cargas")
             pass
     pass
@@ -38,6 +38,13 @@ class Estado_Anual(Estado_General):
         data = db.query_data(f'''SELECT * FROM prueba.Cargas_Academicas
         WHERE Year = {year}''')
         self.tabla_proyectos = tabla_proyectos(data)
+        self.fig_proyecto_genero = proyecto_genero(data);
+        self.horas_ciclo = fig_horas_ciclo(data)
+        self.proyectos_ano = proyectos_ano(data)
+        self.tabla_estado_proyecto = tabla_estado(data)
+        self.fig_estado_proyecto = estado_proyecto(data)
+        self.tabla_tipo = tabla_tipo(data)
+        self.tabla_promedio = tabla_promedio(data)
         pass
     pass
 
@@ -135,10 +142,10 @@ def tabla_estado(data):
     sobrecarga_p = normal["SOBRECARGAS"] if "SOBRECARGAS" in normal.index else 0
 
     df = pd.DataFrame(
-        {"Cantidad de proyectos activos": [total, 100], 
-        "Cantidad de proyectos con vigencia":[vigencia, vigencia_p],
-        "Cantidad de proyectos con carga aprovada para el 2022": [carga, carga_p],
-        "Cantidad de proyectos con sobrecarga": [sobrecarga, sobrecarga_p]})
+        {"A": ["Cantidad de proyectos activos", total, ""], 
+        "B":["Cantidad de proyectos con vigencia", vigencia, vigencia_p],
+        "C": ["Cantidad de proyectos con carga aprovada para el 2022", carga, carga_p],
+        "D": ["Cantidad de proyectos con sobrecarga", sobrecarga, sobrecarga_p]})
     return df
 
 
@@ -147,4 +154,4 @@ def tabla_estado(data):
 
 #Tabla de proyectos
 def tabla_proyectos(data):
-    return data[["Investigador", "Codigo", "Proyecto", "Vicerrect"]]
+    return data[["Investigador", "Codigo", "Proyecto", "Vicerrect", "Carga_Ciclo_I", "Carga_Ciclo_II", "Carga_Ciclo_III"]]

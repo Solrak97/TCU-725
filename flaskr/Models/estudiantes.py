@@ -1,4 +1,4 @@
-from .Estado import *
+from .estado import *
 
 class Estudiantes(MethodView):
      def get(self, ID_institucion):
