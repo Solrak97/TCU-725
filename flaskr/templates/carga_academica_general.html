@@ -18,6 +18,22 @@
     </div>
     
     <div>
+        <h5 style="text-align: center; margin-top: 2%; margin-bottom: 5%;">Cantidad de horas promedio por ciclo</h5>
+        <table class="table table-striped table-bordered">
+            {% for key, value in Estado.tabla_promedio[2:].iterrows() %}
+            <tr>
+                <th>
+                    {{ value["Categoría"] }}
+                </th>
+                <th>
+                    {{ value["Promedio"] }}
+                </th>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    
+    <div>
         <h5 style="text-align: center; margin-top: 2%; margin-bottom: 5%;">Tipo de proyecto</h5>
         <div>
             <table class="table table-striped table-bordered">
@@ -45,7 +61,7 @@
                 </tr>
             </table>
         </div>
-
+        
         <div>
             <table class="table table-striped table-bordered">
                 <tr>
@@ -68,30 +84,13 @@
         </div>
     </div>
     <div>
-        <div>
-            <h5 style="text-align: center; margin-top: 2%; margin-bottom: 5%;">Cantidad de horas promedio por ciclo</h5>
-            <table class="table table-striped table-bordered">
-                {% for key, value in Estado.tabla_promedio[2:].iterrows() %}
-                <tr>
-                    <th>
-                        {{ value["Categoría"] }}
-                    </th>
-                    <th>
-                        {{ value["Promedio"] }}
-                    </th>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </div>
-    <div>
         <div id="estado_proyecto" class="chart"></div>
     </div>
     <div>
-        <div id="proyectos_ano" class="chart"></div>
+        <div id="horas_ciclo" class="chart"></div>
     </div>
     <div>
-        <div id="horas_ciclo" class="chart"></div>
+        <div id="proyectos_ano" class="chart"></div>
     </div>
 </div>
 
