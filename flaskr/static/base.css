@@ -63,3 +63,7 @@ a.active-nav {
 .dropdown:hover .dropdown-content {display: block;}
 
 html{ padding-bottom: 25px;}
+
+p {
+    margin: 2% 20%;
+}
