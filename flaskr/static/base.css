@@ -67,3 +67,14 @@ html{ padding-bottom: 25px;}
 p {
     margin: 2% 20%;
 }
+
+#intro {
+    background-image: url('edificio_de_cimpa_y_matematicas.jpg');
+    text-align: center;
+    color: white;
+    margin: 0%, 20%;
+    padding: 2%;
+    background-size: 100%;
+    background-repeat:no-repeat;
+    background-position:center ;
+}
