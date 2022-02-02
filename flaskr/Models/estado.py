@@ -6,6 +6,7 @@ from database import Database
 import json
 import pandas as pd
 import numpy as np
+import io
 
 #Layout base para los diseños de graficos
 #Podria ser refactorizado a un nuevo archivo

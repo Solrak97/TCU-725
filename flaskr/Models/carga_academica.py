@@ -15,13 +15,18 @@ class Carga_Academica(MethodView):
 
 
 def generar_informe(year):
+    output = io.BytesIO()
+    writer = pd.ExcelWriter(output, engine='xlsxwriter')
     if year is None:
-        return Estado_General().tabla_proyectos.to_csv()
-        pass
+        Estado_General().tabla_proyectos.to_excel(writer, sheet_name='Informe')
     else:
-        return Estado_Anual(year).tabla_proyectos.to_csv()
-        pass
-    pass
+        return Estado_Anual(year).tabla_proyectos.to_excel(writer, sheet_name='Informe')
+    
+    writer.save()
+    xlsx_data = output.getvalue()
+    return xlsx_data
+
+
 
 
 

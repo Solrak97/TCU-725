@@ -51,7 +51,7 @@ def get_informe_carga_general():
     return Response(informe_csv,
                     mimetype="text/plain",
                     headers={"Content-Disposition":
-                            f"attachment;filename=Informe_General.csv"})
+                            f"attachment;filename=Informe_General.xlsx"})
     pass
 
 
@@ -61,7 +61,7 @@ def get_informe_carga_anual(year):
     return Response(informe_csv,
                     mimetype="text/plain",
                     headers={"Content-Disposition":
-                            f"attachment;filename=Informe_{year}.csv"})
+                            f"attachment;filename=Informe_{year}.xlsx"})
     pass
 
 
