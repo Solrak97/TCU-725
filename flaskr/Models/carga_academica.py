@@ -3,58 +3,29 @@ from .estado import *
 #Entry Points para /carga_academica/
 class Carga_Academica(MethodView):
     def get(self, year):
-        if year is None:
-            return render_template('carga_academica_base.html', 
-                Estado=Estado_General(), state = "cargas")
-            pass
-        else:
-            return render_template('carga_academica_base.html', 
-                Estado=Estado_Anual(year), state = "cargas")
-            pass
-    pass
+        Estado = Estado_Carga_Academica(year)
+
+        return render_template('carga_academica_base.html', 
+                Estado = Estado, state = "cargas")
 
 
 def generar_informe(year):
     output = io.BytesIO()
     writer = pd.ExcelWriter(output, engine='xlsxwriter')
-    if year is None:
-        Estado_General().tabla_proyectos.to_excel(writer, sheet_name='Informe')
-    else:
-        return Estado_Anual(year).tabla_proyectos.to_excel(writer, sheet_name='Informe')
     
+    Estado_Carga_Academica(year).tabla_proyectos.to_excel(writer, sheet_name='Informe')
+
     writer.save()
     xlsx_data = output.getvalue()
     return xlsx_data
 
 
-
-
-
-#Refactorizar estas 2 clases ya que inicialmente eran diferentes, ya no
-class Estado_General(Estado):
+class Estado_Carga_Academica(Estado):
     def __init__(self, year=None):
-        super(Estado_General, self).__init__()
-        self.general = True
-        data = db.query_data("SELECT * FROM prueba.Cargas_Academicas")
-        self.tabla_proyectos = tabla_proyectos(data)
-        self.fig_proyecto_genero = proyecto_genero(data);
-        self.horas_ciclo = fig_horas_ciclo(data)
-        self.proyectos_ano = proyectos_ano(data)
-        self.tabla_estado_proyecto = tabla_estado(data)
-        self.fig_estado_proyecto = estado_proyecto(data)
-        self.tabla_tipo = tabla_tipo(data)
-        self.tabla_promedio = tabla_promedio(data)
-        pass
-
-
-
-class Estado_Anual(Estado_General):
-    def __init__(self, year):
-        super(Estado_Anual, self).__init__()
+        super(Estado_Carga_Academica, self).__init__()
         self.year = year
-        self.general = False
-        data = db.query_data(f'''SELECT * FROM prueba.Cargas_Academicas
-        WHERE Year = {year}''')
+        self.general = None
+        data = self.fetch_data(year)
         self.tabla_proyectos = tabla_proyectos(data)
         self.fig_proyecto_genero = proyecto_genero(data);
         self.horas_ciclo = fig_horas_ciclo(data)
@@ -64,8 +35,19 @@ class Estado_Anual(Estado_General):
         self.tabla_tipo = tabla_tipo(data)
         self.tabla_promedio = tabla_promedio(data)
         pass
-    pass
 
+
+
+    def fetch_data(self, year):
+        data = None
+        if year is not None:
+            self.general = False
+            data = db.query_data(f'''SELECT * FROM prueba.Cargas_Academicas
+            WHERE Year = {year}''')
+        else:
+            self.general = True
+            data = db.query_data("SELECT * FROM prueba.Cargas_Academicas")
+        return data
 
     
 def proyectos_ano(data):
