@@ -14,11 +14,24 @@ class Carga_Academica(MethodView):
     pass
 
 
+def generar_informe(year):
+    if year is None:
+        return Estado_General().tabla_proyectos.to_csv()
+        pass
+    else:
+        return Estado_Anual(year).tabla_proyectos.to_csv()
+        pass
+    pass
+
+
+
+#Refactorizar estas 2 clases ya que inicialmente eran diferentes, ya no
 class Estado_General(Estado):
     def __init__(self, year=None):
         super(Estado_General, self).__init__()
         self.general = True
         data = db.query_data("SELECT * FROM prueba.Cargas_Academicas")
+        self.tabla_proyectos = tabla_proyectos(data)
         self.fig_proyecto_genero = proyecto_genero(data);
         self.horas_ciclo = fig_horas_ciclo(data)
         self.proyectos_ano = proyectos_ano(data)

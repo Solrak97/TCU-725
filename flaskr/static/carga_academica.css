@@ -40,3 +40,26 @@ table.dataTable thead .sorting_desc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:before {
 bottom: .5em;
 }
+
+.download-button {
+    padding: 1%;
+}
+
+.download-button > div {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding: 10px;
+    width: 40%;;
+    background-color: black;
+}
+
+.download-button > div > a {
+    display: block;
+    color: rgb(0,192,243);
+}
+
+/* Justificado de la columna 3 */
+tbody > tr :nth-child(3) {
+    text-align: justify !important;
+}

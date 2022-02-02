@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response
 import json
 import plotly
 import os
@@ -42,6 +42,27 @@ app.add_url_rule('/carga_academica', defaults={'year': None},
                  view_func=carga_view, methods=['GET',])
 app.add_url_rule('/carga_academica/<int:year>', view_func=carga_view, methods=['GET',])
 
+
+
+#Refactor de la ruta para unificarla en una sola
+@app.route("/informe_carga_academica")
+def get_informe_carga_general():
+    informe_csv = Models.carga_academica.generar_informe(None)
+    return Response(informe_csv,
+                    mimetype="text/plain",
+                    headers={"Content-Disposition":
+                            f"attachment;filename=Informe_General.csv"})
+    pass
+
+
+@app.route("/informe_carga_academica/<int:year>")
+def get_informe_carga_anual(year):
+    informe_csv = Models.carga_academica.generar_informe(year)
+    return Response(informe_csv,
+                    mimetype="text/plain",
+                    headers={"Content-Disposition":
+                            f"attachment;filename=Informe_{year}.csv"})
+    pass
 
 
 

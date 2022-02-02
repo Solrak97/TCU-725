@@ -22,23 +22,5 @@
 
 
 {% block scripts %}
-<script type='text/javascript'>
-    var graphs = {{ Estado.fig_proyecto_genero | safe}};
-    Plotly.plot('proyecto_genero', graphs, {});
-</script>
 
-<script type='text/javascript'>
-    var graphs = {{ Estado.horas_ciclo | safe}};
-    Plotly.plot('horas_ciclo', graphs, {});
-</script>
-
-<script type='text/javascript'>
-    var graphs = {{ Estado.proyectos_ano | safe}};
-    Plotly.plot('proyectos_ano', graphs, {});
-</script>
-
-<script type='text/javascript'>
-    var graphs = {{ Estado.fig_estado_proyecto | safe}};
-    Plotly.plot('estado_proyecto', graphs, {});
-</script>
 {% endblock %}
