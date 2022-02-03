@@ -7,20 +7,85 @@
 
 {% endblock %}
 
-{% block body%}
-    <!--Contenido actualizable-->
-    {% if Estado.general %}
-        {% include 'carga_academica_general.html'%}
-        {% block general %}
-        {% endblock %}
-    {% else %}
-        {% include 'carga_academica_anual.html' %}
-        {% block anual %}
-        {% endblock %}
-    {% endif %}
-{% endblock%}
+{% block body %}
+<!--Contenido actualizable-->
+{% if Estado.general %}
+{% include 'carga_academica_general.html' %}
+{% block general %}
+{% endblock %}
+{% else %}
+{% include 'carga_academica_anual.html' %}
+{% block anual %}
+{% endblock %}
+{% endif %}
+
+<div class = "table-wrapper">
+    {% set row_data = Estado.tabla_proyectos.values.tolist() %}
+    <table id="dtDynamicVerticalScroll" class="table table-striped table-bordered table-sm" cellspacing="0"
+        width="100%">
+        <thead>
+            <tr>
+                <th class="th-sm">Investigador</th>
+                <th class="th-sm">Codigo</th>
+                <th class="th-sm">Proyecto</th>
+                <th class="th-sm">Tipo de proyecto</th>
+                <th class="th-sm">Carga Ciclo I</th>
+                <th class="th-sm">Carga Ciclo II</th>
+                <th class="th-sm">Carga Ciclo III</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in row_data %}
+            <tr>
+                {% for col in row %}
+                <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Investigador</th>
+                <th>Codigo</th>
+                <th>Proyecto</th>
+                <th>Tipo de proyecto</th>
+                <th>Carga Ciclo I</th>
+                <th>Carga Ciclo II</th>
+                <th>Carga Ciclo III</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+{% if Estado.general %}
+<div class="download-button">
+    <div>
+        <a href="\informe_carga_academica">Generar informe</a>
+    </div>
+</div>
+{% else %}
+<div class="download-button">
+    <div>
+        <a href="\informe_carga_academica\{{Estado.year}}">Generar informe</a>
+    </div>
+</div>
+{% endif %}
+
+
+
+{% endblock %}
 
 
 {% block scripts %}
+
+<script>
+    $(document).ready(function () {
+        $('#dtDynamicVerticalScroll').DataTable({
+            "scrollY": "50vh",
+            "scrollCollapse": true,
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
 
 {% endblock %}

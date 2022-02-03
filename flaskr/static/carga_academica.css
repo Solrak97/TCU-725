@@ -60,6 +60,23 @@ bottom: .5em;
 }
 
 /* Justificado de la columna 3 */
+table tbody > tr :nth-child(2) {
+    white-space: nowrap;
+    width:max-content;
+}
+
+table tbody > tr :nth-child(1) {
+    white-space: nowrap;
+    width:max-content;
+    text-align: justify !important;
+}
+
 tbody > tr :nth-child(3) {
     text-align: justify !important;
+}
+
+.table-wrapper {
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 70%;
 }
